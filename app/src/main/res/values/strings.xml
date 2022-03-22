@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OverplayTest</string>
+    <string name="session_count">SESSION COUNT: %1$d</string>
+    <string name="clear_session_count">Clear Session count</string>
+</resources>

@@ -121,6 +121,11 @@ class MainViewModel : ViewModel(), SensorEventListener {
         sensorManager.unregisterListener(this, this.sensor)
     }
 
+
+/*   for this implementation, you can use both Services,
+     Work Manager or RxJava, since in the task there was a
+     recommendation to use the coroutines and flow I settled on this option
+*/
     fun tickerTimerHandler() {
         viewModelScope.launch {
 
@@ -129,19 +134,20 @@ class MainViewModel : ViewModel(), SensorEventListener {
 
             for (event in ticker) {
                 count++
-                if (timerDropDown && count < 600000) {
+                if (timerDropDown && count < TIMER_MAX_VALUE) {
                     timerValue(true)
                     break
                 }
 
-                if (count == 600000) break
+                if (count == TIMER_MAX_VALUE) break
             }
             ticker.cancel()
         }
     }
 
     companion object {
-        private val NS2S = 1.0f / 1000000000.0f
-        private val EPSILON = 0.1
+        private const val NS2S = 1.0f / 1000000000.0f
+        private const val EPSILON = 0.1
+        private const val TIMER_MAX_VALUE = 600000
     }
 }

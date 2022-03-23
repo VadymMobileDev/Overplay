@@ -2,9 +2,8 @@ package com.example.overplaytest.util
 
 open class Vector {
     var points = floatArrayOf(0f, 0f, 0f, 0f)
-    fun array(): FloatArray {
-        return points
-    }
+
+    fun array(): FloatArray = points
 
     fun copyVec4(vec: Vector) {
         points[0] = vec.points[0]

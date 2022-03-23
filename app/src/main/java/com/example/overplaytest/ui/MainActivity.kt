@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         this.sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
 
         viewModel.sensorCreate(sensorManager)
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sessionCount() {
-        viewModel.timerLiveData.observe(this) { v ->
+        viewModel.timerLiveData.observe(this) { _ ->
             sharedPrefEdit(sharedPrefRead() + 1)
             text_session_count.text = getString(R.string.session_count, sharedPrefRead())
         }
@@ -77,6 +77,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val SESSION_COUNT = "session_count"
+        private const val SESSION_COUNT = "session_count"
     }
 }

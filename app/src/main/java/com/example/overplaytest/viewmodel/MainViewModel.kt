@@ -10,12 +10,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.overplaytest.util.Quaternion
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-class MainViewModel : ViewModel(), SensorEventListener {
+class MainViewModel  @Inject constructor() : ViewModel(), SensorEventListener {
 
     private lateinit var sensor: Sensor
 

@@ -6,13 +6,21 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.overplaytest.R
+import com.example.overplaytest.di.impl.injectViewModel
 import com.example.overplaytest.viewmodel.MainViewModel
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var viewModel: MainViewModel
 
     private lateinit var sensorManager: SensorManager
 
@@ -21,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        AndroidInjection.inject(this)
+        viewModel = injectViewModel(viewModelFactory)
 
         this.sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return

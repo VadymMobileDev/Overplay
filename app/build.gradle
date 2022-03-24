@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
     id 'kotlin-android-extensions'
 }
 
@@ -9,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.overplaytest"
-        minSdk 24
+        minSdk 25
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -29,6 +30,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
     }
 }
 
@@ -44,6 +48,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
     implementation "androidx.fragment:fragment-ktx:$fragments_version"
+
+    //dagger
+    kapt 'com.google.dagger:dagger-compiler:2.41'
+    implementation 'com.google.dagger:dagger-android:2.41'
+    implementation 'com.google.dagger:dagger-android-support:2.41'
+    kapt 'com.google.dagger:dagger-android-processor:2.41'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
